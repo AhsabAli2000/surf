@@ -1,13 +1,13 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.surf/script.js";
-static char *styledir       = "~/.surf/styles/";
-static char *certdir        = "~/.surf/certificates/";
-static char *cachedir       = "~/.surf/cache/";
-static char *cookiefile     = "~/.surf/cookies.txt";
+static char *scriptfile     = "~/.config/.surf/script.js";
+static char *styledir       = "~/.config/.surf/styles/";
+static char *certdir        = "~/.config/.surf/certificates/";
+static char *cachedir       = "~/.config/.surf/cache/";
+static char *cookiefile     = "~/.config/.surf/cookies.txt";
 static char **plugindirs    = (char*[]){
-	"~/.surf/plugins/",
+	"~/.config/.surf/plugins/",
 	LIBPREFIX "/mozilla/plugins/",
 	NULL
 };
@@ -77,7 +77,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         .v = (const char *[]){ "/bin/sh", "-c", \
              "prop=\"$(printf '%b' \"$(xprop -id $1 $2 " \
              "| sed \"s/^$2(STRING) = //;s/^\\\"\\(.*\\)\\\"$/\\1/\")\" " \
-             "| dmenu -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+             "| dmenu -l 5 -c -p \"$4\" -w $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
              "surf-setprop", winid, r, s, p, NULL \
         } \
 }
@@ -85,7 +85,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 /* DOWNLOAD(URI, referer) */
 #define DOWNLOAD(u, r) { \
         .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
+             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\" -O ~/Downloads" \
              " -e \"$3\" \"$4\"; read", \
              "surf-download", useragent, cookiefile, r, u, NULL \
         } \
@@ -199,3 +199,5 @@ static Button buttons[] = {
 	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
+
+#define HOMEPAGE "https://duckduckgo.com/"
