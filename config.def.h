@@ -1,13 +1,13 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.config/.surf/script.js";
-static char *styledir       = "~/.config/.surf/styles/";
-static char *certdir        = "~/.config/.surf/certificates/";
-static char *cachedir       = "~/.config/.surf/cache/";
-static char *cookiefile     = "~/.config/.surf/cookies.txt";
+static char *scriptfile     = "~/.surf/script.js";
+static char *styledir       = "~/.surf/styles/";
+static char *certdir        = "~/.surf/certificates/";
+static char *cachedir       = "~/.surf/cache/";
+static char *cookiefile     = "~/.surf/cookies.txt";
 static char **plugindirs    = (char*[]){
-	"~/.config/.surf/plugins/",
+	"~/.surf/plugins/",
 	LIBPREFIX "/mozilla/plugins/",
 	NULL
 };
@@ -20,7 +20,6 @@ static char **plugindirs    = (char*[]){
  */
 static Parameter defconfig[ParameterLast] = {
 	/* parameter                    Arg value       priority */
-	[AcceleratedCanvas]   =       { { .i = 1 },     },
 	[AccessMicrophone]    =       { { .i = 0 },     },
 	[AccessWebcam]        =       { { .i = 0 },     },
 	[Certificate]         =       { { .i = 0 },     },
@@ -41,7 +40,6 @@ static Parameter defconfig[ParameterLast] = {
 	[KioskMode]           =       { { .i = 0 },     },
 	[LoadImages]          =       { { .i = 1 },     },
 	[MediaManualPlay]     =       { { .i = 1 },     },
-	[Plugins]             =       { { .i = 1 },     },
 	[PreferredLanguages]  =       { { .v = (char *[]){ NULL } }, },
 	[RunInFullscreen]     =       { { .i = 0 },     },
 	[ScrollBars]          =       { { .i = 1 },     },
@@ -59,7 +57,6 @@ static Parameter defconfig[ParameterLast] = {
 static UriParameters uriparams[] = {
 	{ "(://|\\.)suckless\\.org(/|$)", {
 	  [JavaScript] = { { .i = 0 }, 1 },
-	  [Plugins]    = { { .i = 0 }, 1 },
 	}, },
 };
 
@@ -182,7 +179,6 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_g,      toggle,     { .i = Geolocation } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_s,      toggle,     { .i = JavaScript } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_i,      toggle,     { .i = LoadImages } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_v,      toggle,     { .i = Plugins } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
@@ -200,4 +196,4 @@ static Button buttons[] = {
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
 
-#define HOMEPAGE "file:///home/ahabpc/.config/.surf/homepage.html"
+#define HOMEPAGE "file:///home/ahabpc/.surf/homepage.html"
